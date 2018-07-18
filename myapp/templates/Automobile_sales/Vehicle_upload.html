@@ -1,0 +1,126 @@
+{% extends 'Automobile_sales/base.html' %}
+{% load staticfiles %}
+
+
+{% block body%}
+<div class="upload_form">
+  <form method="post" enctype="multipart/form-data" action="/vehicle_store/">
+      {% csrf_token %}
+      <div class = "card">
+      <div class="card-header">
+            <strong>Vehicle Details</strong> 
+      </div>
+       <div class="card-body card-block">
+      <div class="row form-group">
+           <div class="col-6">
+              <div class="form-group"><label for="Vehicle_type" class=" form-control-label">* Vehicle Type</label>
+                  <input type="text" name = "Vehicle_type" placeholder="Enter vehicle type" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group"><label for="Brand" class=" form-control-label">* Brand</label>
+                  <input type="text" name = "brand" placeholder="Enter vehicle brand" class="form-control" required>
+              </div>
+            </div>
+      </div>
+       <div class="row form-group">
+           <div class="col-6">
+                        
+              <div class="form-group"><label for="Model_no" class=" form-control-label">Model No</label>
+                <input type="text" name = "model" placeholder="Enter model number" class="form-control">
+              </div>
+            </div>
+            <div class="col-6">
+               <div class="form-group"><label for="Engine_power" class=" form-control-label">Engine Power</label>
+                <input type="text" name = "engine_power"  class="form-control">
+               </div>
+            </div>
+        </div>
+        <div class="row form-group">
+           <div class="col-6">
+                        
+              <div class="form-group"><label for="Price" class=" form-control-label">* Price</label>
+                <input type="text" name = "price"  class="form-control" required>
+              </div>
+            </div>
+            <div class="col-6">
+               <div class="form-group"><label for="Description" class=" form-control-label">Description</label>
+                 <input type="text" name = "description"  class="form-control">
+               </div>
+            </div>
+        </div>
+        <div class="form-group"><label for="Upload_Picture" class=" form-control-label">* Upload Picture</label>
+                <img src=""  id ="image" name = "picture">
+                <input type="file" name="imagefile" onchange="showImage.call(this)" accept="image/gif, image/jpeg, image/png" class="form-control" required >
+                
+        </div>
+         </div >
+
+        <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                          <i class="fa fa-dot-circle-o"></i> Submit
+                        </button>
+                        <button type="reset" class="btn btn-danger btn-sm">
+                          <i class="fa fa-ban"></i> Reset
+                        </button>
+       </div>
+      </div>
+     
+
+                         
+      <!--  <fieldset>
+            <fieldset>
+                <label for="Vehicle_type">* Vehicle Type</label>
+                <input type="text" name="Vehicle_type" required />
+            </fieldset>
+            <fieldset>
+                <label for="Brand">* Brand</label>
+                <input type="text" name="brand" required />
+            </fieldset>
+            <fieldset>
+                <label for="Model_no">Model No</label>
+                <input type="text" name="model" />
+            </fieldset>
+            <fieldset>
+                <label for="Engine_power">Engine power</label>
+                <input type="text" name="engine_power" />
+            </fieldset>
+            <fieldset>
+                <label for="Price">* Price</label>
+                <input type="text" name="price" required />
+            </fieldset>
+            <fieldset>
+                <label for="Description">Description</label>
+                <input type="text" name="description"/>
+            </fieldset>
+            <fieldset>
+                <label for="Upload_Picture">* Upload Picture</label>
+                <img src=""  id ="image" name = "picture">
+               <input type="file" name="imagefile" onchange="showImage.call(this)" accept="image/gif, image/jpeg, image/png" required >
+            </fieldset>
+            <input type="submit"  value="Upload Details" />
+        </fieldset> -->
+       
+   </form>
+   </div>
+{% endblock %}
+
+{% block script %}
+
+<script>
+  function showImage()
+  {
+    if(this.files && this.files[0])
+    {
+      var obj = new FileReader();
+      obj.onload = function(data){
+        var image = document.getElementById("image");
+        image.src = data.target.result;
+        image.style.display = "block";
+      }
+      obj.readAsDataURL(this.files[0]);
+    }
+  }
+</script>    
+
+{% endblock %}

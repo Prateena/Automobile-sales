@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+  <title>Automobile Sales System</title>
+  <meta charset="utf-8">
+  <meta name="viewport"content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+   <link rel="stylesheet" href="{% static 'assets/scss/style.css' %}">
+
+
+
+<style >
+html,body{
+  height: 100%
+}
+.bg {
+    background-image: url({%static 'images/background.jpg'%});
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+
+
+
+}
+</style>
+
+
+
+</head>
+
+<body class ="bg">
+
+  <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+   
+            <div class="login-content">
+                <h2>Login</h2>
+                <div class="login-logo">
+
+                    <a href="index.html">
+                        <img class="align-content" src="" alt="">
+                    </a>
+                </div>
+                <div class="login-form">
+                    <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" class="form-control" name ="name" id ="User" placeholder="Enter username">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name ="psw" id = "password" placeholder="Password">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Remember Me
+                            </label>
+                            <label class="pull-right">
+                                <a href="#" style="color: gray">Forgotten Password?</a>
+                            </label>
+
+                        </div>
+                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
+                        <span>
+                            {% if error %}
+                            <p>Invalid Password or Username</p>
+                            {% endif %}
+                        </span>
+                        
+                        
+                        <div class="register-link m-t-15 text-center">
+                            <p>Don't have account ? <a href="{% url 'Register' %}" style="color: gray"> Sign Up Here</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+  
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>  
+</body>
+</html>

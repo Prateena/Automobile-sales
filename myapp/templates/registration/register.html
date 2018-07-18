@@ -1,0 +1,136 @@
+{% extends 'Automobile_sales/base.html' %}
+{% load staticfiles %}
+
+
+{% block body%}
+  <!-- form-start -->
+  <div class = "register">
+  <div class = "col-2">
+  </div>
+
+  <div class= "col-6" >  
+    <form name = "signup" method="post" action="/signup/" id ="signup_form" class="form-horizontal" >
+          {% csrf_token %}
+          <fieldset><legend class="text-center"><h1>Register</h1> <small> required *</small></span></legend>
+      
+          <div class="form-group">
+              <label for="First_name" ><span class="req">* </span>First name</label>
+              <input type="text" class="form-control" name="first-name" placeholder="enter your first name" required >
+          </div>
+     
+
+          <div class="form-group">
+              <label for="Middle_name" >Middle name</label>
+              <input type="text" class="form-control" name="middle-name" placeholder="enter your middle name">
+          </div>
+      
+          <div class="form-group">
+              <label for="Last_name" ><span class="req">* </span>Last name</label>
+              <input type="text" class="form-control" name="last-name" placeholder="enter your last name" required >
+          </div>
+      
+          <div class="form-group">
+              <label for="gender" >Gender</label>
+        
+             <select name="gender" class="dropdown">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="Other">Other</option>
+             </select> 
+         </div>
+
+
+          <div class="form-group">
+              <label for="bday" ><span class="req">* </span>Birth Date</label>
+              <input type="date" class="form-control" name="bday" required > 
+          </div>
+     
+          <div class="form-group">
+              <label for="email" ><span class="req">* </span>Email-id</label>
+              <input type="text" class="form-control" name="email" placeholder="enter your email" onchange="email_validate(this.value);"/>
+              <div class="status" id="status"></div>
+          </div>
+       
+          <div class="form-group">
+              <label for="user-name" ><span class="req">* </span>Username</label>
+              <input type="text" class="form-control" name="user-name" onkeyup = "Validate(this)" placeholder="minimum 6 letters" required>
+          </div>
+      
+          <div class="form-group">
+              <label for="password"><span class="req">* </span> Password: </label>
+              <input required name="password" type="password" class="form-control inputpass" minlength="4" maxlength="16"  id="pass1" /> </p>
+
+              <label for="password"><span class="req">* </span> Password Confirm: </label>
+              <input required name="password" type="password" class="form-control inputpass" minlength="4" maxlength="16" placeholder="Enter again to validate"  id="pass2" onkeyup="checkPass(); return false;" />
+              <span id="confirmMessage" class="confirmMessage"></span>
+          </div>
+
+                                    
+          <div class="form-group">
+              <input class="btn btn-success" type="submit" name="submit_reg" value="Register">
+          </div>
+            
+      </form> 
+      </div> 
+      <div class = "col-2">
+      </div>
+  
+  </div>
+
+  {% endblock %}
+  <!-- form-end -->
+ {% block script %}
+
+<script type="text/javascript">
+                          
+function checkPass()
+{
+    //Store the password field objects into variables ...
+    var pass1 = document.getElementById('pass1');
+    var pass2 = document.getElementById('pass2');
+    //Store the Confimation Message Object ...
+    var message = document.getElementById('confirmMessage');
+    //Set the colors we will be using ...
+    var goodColor = "#66cc66";
+    var badColor = "#ff6666";
+    //Compare the values in the password field 
+    //and the confirmation field
+    if(pass1.value == pass2.value){
+        //The passwords match. 
+        //Set the color to the good color and inform
+        //the user that they have entered the correct password 
+        pass2.style.backgroundColor = goodColor;
+        message.style.color = goodColor;
+        message.innerHTML = "Passwords Match"
+    }else{
+        //The passwords do not match.
+        //Set the color to the bad color and
+        //notify the user.
+        pass2.style.backgroundColor = badColor;
+        message.style.color = badColor;
+        message.innerHTML = "Passwords Do Not Match!"
+    }
+} 
+f
+// validates text only
+function Validate(txt) {
+    txt.value = txt.value.replace(/[^a-zA-Z-'\n\r.]+/g, '');
+}
+// validate email
+function email_validate(email)
+{
+var regMail = /^([_a-zA-Z0-9-]+)(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,3})$/;
+
+    if(regMail.test(email) == false)
+    {
+    document.getElementById("status").innerHTML    = "<span class='warning'>Email address is not valid yet.</span>";
+    }
+    else
+    {
+    document.getElementById("status").innerHTML = "<span class='valid'>Thanks, you have entered a valid Email address!</span>"; 
+    }
+}
+
+</script>
+{% endblock %}
+    

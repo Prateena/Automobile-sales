@@ -1,0 +1,50 @@
+{% extends 'Automobile_sales/base.html' %}
+{% load staticfiles %}
+{% block head %}
+  <link rel="stylesheet"  href="{% static 'css/automobile.css' %}">
+{% endblock %}
+{% block body %}
+<div class="card-header"><strong>Posts</strong><small> List of posts</small></div>
+        <table id = "myTable" class ="display">
+          <thead>
+            <tr>
+                <th>Vehicle Type</th>
+                <th>Brand</th>
+                <th>Model No</th>
+                <th>Engine Power</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Image</th>
+                
+            </tr>
+          </thead>
+        
+         <tbody>
+          {% if queryset %}
+            There are {{queryset| length}} records:
+            {% for obj in queryset %}
+            <tr>
+                <td>{{obj.vehicle_type}}</td>
+                <td>{{obj.brand}}</td>
+                <td>{{obj.model_no}}</td>
+                <td>{{obj.engine_power}}</td>
+                <td>{{obj.price}}</td>
+                <td>{{obj.description}}</td>
+                <td>
+                  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=".bd-example-modal-lg" data-url="{{obj.image.url}}">Show Image</button>
+
+                  
+                </td>
+            </tr>
+          {% endfor %} 
+        {% else %}
+          There are no records in the system
+        {% endif %}
+        </tbody>
+    </table>
+     </div>
+  {% endblock %}
+  
+  {% block script %}
+    
+  {% endblock %}
